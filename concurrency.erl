@@ -7,6 +7,8 @@ start(N) ->
    register(pc, spawn(fun() ->  c(N) end)),
    io:format("Todas as chamdas~n").
 
+
+
 a(0) -> ok;
 a(N) ->
    io:format("A~n"),
