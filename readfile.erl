@@ -9,6 +9,7 @@ start(FilePath) ->
 
 getText(File) ->
    TXT = io:get_line(File,''),
+   sleep(300),
    printer ! {TXT},
    receive
        {printed} ->
@@ -24,7 +25,13 @@ printText() ->
            sender ! {ok};
        {Text} ->
            io:format("        ~p~n",[Text]),
+           sleep(300),
            sender ! {printed},
            printText()
+   end.
+
+sleep(T) ->
+   receive
+   after T -> true
    end.
 
