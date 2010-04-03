@@ -8,7 +8,8 @@ start(FilePath) ->
 
 
 getText(File) ->
-   printer ! {io:get_line(File,'')},
+   TXT = io:get_line(File,''),
+   printer ! {TXT},
    receive
        {printed} ->
           getText(File);
@@ -20,10 +21,9 @@ printText() ->
    receive
        {eof} ->
            io:format("[eof]~n"),
-           sender ! {ok},
-           printText();
+           sender ! {ok};
        {Text} ->
-           io:format("~p~n",Text),
+           io:format("        ~p~n",[Text]),
            sender ! {printed},
            printText()
    end.
