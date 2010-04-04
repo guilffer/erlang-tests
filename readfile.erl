@@ -24,7 +24,7 @@ printText() ->
            io:format("[eof]~n"),
            sender ! {ok};
        {Text} ->
-           io:format("        ~p~n",[Text]),
+           io:format("~s",[Text]),
            sleep(300),
            sender ! {printed},
            printText()
